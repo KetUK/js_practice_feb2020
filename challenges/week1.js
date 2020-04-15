@@ -27,7 +27,7 @@ function getMiddleCharacter(str) {
   if (str === undefined) throw new Error("str is required");
   let isOddLength = false;
   let length = str.length;
-  if (length % 2 == 1) {
+  if (length % 2 === 1) {
     isOddLength = true;
   }
 
@@ -41,41 +41,22 @@ function getMiddleCharacter(str) {
 
 function reverseWord(word) {
   if (word === undefined) throw new Error("word is required");
-  let reverse = null;
-  for (i = word.length; i > -1; i--) {
-    if (reverse == null) {
-      reverse = word[i];
-    } else {
-      reverse += word[i];
-    }
-  }
-
-  return reverse;
+  return word.split("").reverse().join("");
 }
 
 function reverseAllWords(words) {
   if (words === undefined) throw new Error("words is required");
   reverseWordArray = [];
-  for (i = 0; i < words.length; i++) {
-    let reverse = null;
-    let word = words[i];
-    for (j = word.length; j > -1; j--) {
-      if (reverse == null) {
-        reverse = word[j];
-      } else {
-        reverse += word[j];
-      }
-    }
-
-    reverseWordArray.push(reverse);
-  }
+  words.forEach((item) => {
+    reverseWordArray.push(reverseWord(item));
+  });
 
   return reverseWordArray;
 }
 
 function countLinuxUsers(users) {
   if (users === undefined) throw new Error("users is required");
-  let linuxUsers = users.filter(user => user.type === "Linux");
+  let linuxUsers = users.filter((user) => user.type === "Linux");
   return linuxUsers.length;
 }
 
@@ -112,5 +93,5 @@ module.exports = {
   reverseAllWords,
   countLinuxUsers,
   getMeanScore,
-  simpleFizzBuzz
+  simpleFizzBuzz,
 };

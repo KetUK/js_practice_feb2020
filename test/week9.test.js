@@ -45,7 +45,7 @@ describe("isValidDNA", () => {
   });
 });
 
-describe.only("getComplementaryDNA", () => {
+describe("getComplementaryDNA", () => {
   test("returns DNA pairs - T always pairs with A, and C always pairs with G", () => {
     expect(getComplementaryDNA("CGTAGCAATCG")).toBe("GCATCGTTAGC");
     expect(getComplementaryDNA("GTAC")).toBe("CATG");
@@ -115,7 +115,7 @@ describe("createMatrix", () => {
   });
 });
 
-describe.only("areWeCovered", () => {
+describe("areWeCovered", () => {
   test("returns error when first argument to function is not Array", () => {
     expect(() => {
       areWeCovered("", "Monday");
