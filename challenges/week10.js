@@ -88,6 +88,34 @@ const getScreentimeAlertList = (users, date) => {
  */
 const hexToRGB = (hexStr) => {
   if (hexStr === undefined) throw new Error("hexStr is required");
+  if (hexStr.length >= 8) throw new Error("Your input contains too many characters!");
+
+  let hex = "";
+  if (hexStr.charAt(0) === "#") {
+    hex = hexStr.substr(1);
+  } else {
+    throw Error("Invalid Input Hex String");
+  }
+
+  let values = hex.split("");
+  let red, green, blue;
+  console.log(parseInt(values[0].toString() + values[0].toString(), 16));
+  if (hex.length === 2) {
+    red = parseInt(values[0].toString() + values[1].toString(), 16);
+    green = red;
+    blue = red;
+  } else if (hex.length === 3) {
+    red = parseInt(values[0].toString() + values[0].toString(), 16);
+    green = parseInt(values[1].toString() + values[1].toString(), 16);
+    blue = parseInt(values[2].toString() + values[2].toString(), 16);
+  } else if (hex.length === 6) {
+    red = parseInt(values[0].toString() + values[1].toString(), 16);
+    green = parseInt(values[2].toString() + values[3].toString(), 16);
+    blue = parseInt(values[4].toString() + values[5].toString(), 16);
+  } else {
+    return false;
+  }
+  return `rgb(${red},${green},${blue})`;
 };
 
 /**
@@ -102,6 +130,38 @@ const hexToRGB = (hexStr) => {
  */
 const findWinner = (board) => {
   if (board === undefined) throw new Error("board is required");
+
+  let winner = null;
+
+  let boardArray = [];
+
+  for (let i = 0; i < board.length; i++) {
+    let row = board[i];
+    for (let i = 0; i < row.length; i++) {
+      boardArray.push(row[i]);
+    }
+  }
+
+  for (let i = 0; i < board.length; i++) {
+    if (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2]) {
+      winner = boardArray[0];
+    } else if (boardArray[3] === boardArray[4] && boardArray[3] === boardArray[5]) {
+      winner = boardArray[3];
+    } else if (boardArray[6] === boardArray[7] && boardArray[6] === boardArray[8]) {
+      winner = boardArray[6];
+    } else if (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]) {
+      winner = boardArray[0];
+    } else if (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7]) {
+      winner = boardArray[1];
+    } else if (boardArray[2] === boardArray[5] && boardArray[2] === boardArray[8]) {
+      winner = boardArray[2];
+    } else if (boardArray[0] === boardArray[4] && boardArray[0] === boardArray[8]) {
+      winner = boardArray[0];
+    } else if (boardArray[2] === boardArray[4] && boardArray[2] === boardArray[6]) {
+      winner = boardArray[2];
+    }
+  }
+  return winner;
 };
 
 module.exports = {

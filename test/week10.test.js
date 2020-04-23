@@ -79,3 +79,53 @@ describe("getScreentimeAlertList", () => {
     expect(getScreentimeAlertList(userList, "2020-04-03")).toEqual(["beth_1234", "sam_j_1989"]);
   });
 });
+
+describe("hexToRGB", () => {
+  test("returns error when hexStr is Not Valid", () => {
+    expect(() => {
+      hexToRGB("XYZF1133");
+    }).toThrow("Your input contains too many characters!");
+  });
+
+  test("returns error when hexStr doesnt Not start with #", () => {
+    expect(() => {
+      hexToRGB("FF1133");
+    }).toThrow("Invalid Input Hex String");
+  });
+
+  test("return transformed hex code into an RGB code", () => {
+    expect(hexToRGB("#FF1133")).toBe("rgb(255,17,51)");
+  });
+});
+
+describe("findWinner", () => {
+  let XWinnerBoard = [
+    ["X", "0", null],
+    ["X", null, "0"],
+    ["X", null, "0"],
+  ];
+
+  test("return an array of usernames of users who have used more than 100 minutes of screentime", () => {
+    expect(findWinner(XWinnerBoard)).toBe("X");
+  });
+
+  let OWinnerBoard = [
+    ["0", "0", "0"],
+    ["X", null, "X"],
+    ["X", null, "0"],
+  ];
+
+  test("return an array of usernames of users who have used more than 100 minutes of screentime", () => {
+    expect(findWinner(OWinnerBoard)).toBe("0");
+  });
+
+  let diagnoalWinnerBoard = [
+    ["0", "0", null],
+    ["X", "0", "X"],
+    ["X", null, "0"],
+  ];
+
+  test("return an array of usernames of users who have used more than 100 minutes of screentime", () => {
+    expect(findWinner(diagnoalWinnerBoard)).toBe("0");
+  });
+});
